@@ -1,0 +1,18 @@
+# Created by .ignore support plugin (hsz.mobi)
+!/.idea/
+!/demo2-rabbitmq.iml
+!/HELP.md
+.gitignore
+.idea/.gitignore
+.idea/codeStyles/
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/libraries/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+HELP.md
+demo2-rabbitmq.iml
+src/main/resources/static/
+src/main/resources/templates/

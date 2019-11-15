@@ -22,12 +22,15 @@ public class Demo2ApplicationTests {
 
     @Test
     public void hello() throws Exception {
-        sender.send(99);
+        for (int i = 0; i < 5; i++) {
+            sender.send(i + 1);
+        }
     }
 
 
     @Test
     public void contextLoads() throws InterruptedException {
+        // 模糊匹配发送
         rabbitTemplate.convertAndSend("exchange", "topic.**", "controller："
                 + new SimpleDateFormat("yyyy-MM-dd HH:mm:SSS").format(new Date()));
         rabbitTemplate.convertAndSend("exchange", "topic.message", "controller："

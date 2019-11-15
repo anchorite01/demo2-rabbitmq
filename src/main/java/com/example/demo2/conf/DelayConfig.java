@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description 延时消息的实现
+ * @Description 延时消息的实现 - 插件实现
  * @Author zhenghao
  * @Date 2019/9/12 17:41
  */

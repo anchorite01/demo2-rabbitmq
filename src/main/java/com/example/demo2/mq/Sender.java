@@ -12,14 +12,24 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @Description: 发送消息
+ * @Author: zhenghao
+ * @Date: 2019/11/14 14:57
+ */
 @Component
 public class Sender {
 
     @Autowired
     private AmqpTemplate rabbitTemplate;
-
+    // 日期格式化使用
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    /**
+     * @Description: 发送消息
+     * @Author: zhenghao
+     * @Date: 2019/11/14 14:57
+     */
     public void send(Integer task) {
         String context = "hello " + df.format(new Date());
         List<Object> list = new ArrayList<>();
@@ -27,9 +37,14 @@ public class Sender {
         list.add(new User(10L, 20, "张三", "123321", new Date()));
 //        System.out.println("Sender : " + list);
         System.out.println("Sender:" + task);
-        this.rabbitTemplate.convertAndSend("queue", list);
+        this.rabbitTemplate.convertAndSend("direct_queue", list);
     }
 
+    /**
+     * @Description: 延时消息
+     * @Author: zhenghao
+     * @Date: 2019/11/14 14:57
+     */
     public void sendDelayMessage(String queueName, String msg) {
         String nowDateStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         msg = "发送时间:" + nowDateStr + "\n" + " msg:" + msg;

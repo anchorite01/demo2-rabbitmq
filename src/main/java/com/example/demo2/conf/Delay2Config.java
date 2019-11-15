@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Description 延时消息的实现
+ * @Description 延时消息的实现 - 死信消息实现
  * @Author zhenghao
  * @Date 2019/9/12 17:41
  */

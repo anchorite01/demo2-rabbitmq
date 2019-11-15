@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
 /**
- * @Description TODO
+ * @Description 定时任务发送消息
  * @Author zhenghao
  * @Date 2019/9/12 11:23
  */

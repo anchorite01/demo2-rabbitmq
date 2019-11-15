@@ -33,7 +33,7 @@ public class DemoController {
         List<Object> list = new ArrayList<>();
         list.add("hello");
         list.add(new User(10L, 20, "张三", "123321", new Date()));
-        rabbitTemplate.convertAndSend("queue", list);
+        rabbitTemplate.convertAndSend("direct_queue", list);
 
         System.out.println("--------------------- 通配符匹配消息 ------------------------");
         // 匹配路由

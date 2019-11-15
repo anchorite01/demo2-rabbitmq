@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 /**
- * @description Topic转发模式
+ * @description Topic转发模式（模糊匹配）
+ *      符号“#”表示匹配一个或多个词，符号“*”表示匹配一个词。
  * @author zhenghao
  * @date 14:36 2019/9/12
  **/

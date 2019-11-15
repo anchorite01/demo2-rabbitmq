@@ -8,14 +8,23 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * @Description: 接收消息
+ * @Author: zhenghao
+ * @Date: 2019/11/14 14:56
+ */
 @Component
 public class Receiver {
 
     // 完全匹配消息
-    @RabbitListener(queues="queue")    //监听器监听指定的Queue
+    @RabbitListener(queues="direct_queue")    //监听器监听指定的Queue
     public void processC(List list) {
-        System.out.println("Receive:"+list);
+        System.out.println("Receive1:"+list);
+    }
+    // 完全匹配消息
+    @RabbitListener(queues="direct_queue")    //监听器监听指定的Queue
+    public void processD(List list) {
+        System.out.println("Receive2:"+list);
     }
 
     // 通配符匹配消息

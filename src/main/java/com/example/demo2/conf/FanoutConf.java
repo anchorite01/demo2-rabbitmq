@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @Description Fanout形式又叫广播形式
+ *      一个消费者将消息首先发送到交换器，交换器绑定到多个队列，然后被监听该队列的消费者所接收并消费。
  * @Author zhenghao
  * @Date 2019/9/12 14:06
  */

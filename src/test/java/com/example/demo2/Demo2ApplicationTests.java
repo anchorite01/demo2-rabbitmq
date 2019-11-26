@@ -1,6 +1,7 @@
 package com.example.demo2;
 
 import com.example.demo2.conf.Delay2Config;
+import com.example.demo2.conf.DelayConfig;
 import com.example.demo2.mq.Sender;
 import com.example.demo2.utils.DateUtil;
 import org.junit.Test;
@@ -38,29 +39,20 @@ public class Demo2ApplicationTests {
         rabbitTemplate.convertAndSend("exchange", "topic.message.hello", "controller："
                 + DateUtil.nowDateFormat());
 
-        /*rabbitTemplate.convertAndSend("fanoutExchange", null, "hello, rabbitmq"
+        /*rabbitTemplate.convertAndSend(FanoutConf.FANOUT_EXCHANGE, null, "hello, rabbitmq"
                 + DateUtil.nowDateFormat());*/
     }
 
 
     @Test
     public void delayQueue1Test() {
-        // sender.sendDelayMessage("delay_queue_1", "这是一条延时消息");
-        rabbitTemplate.convertAndSend("delayExchange", "delay_queue_1",  "延时消息1,发送时间:" + DateUtil.nowDateFormat() + "\n" , message -> {
-            // 设置延时时间
-            message.getMessageProperties().setHeader("x-delay", 10000);
-            return message;
-        });
+        sender.sendDelayMessage(DelayConfig.DELAY_QUEUE1, "这是一条延时消息", 10000);
     }
 
 
     @Test
     public void queryTest2() {
-        System.out.println("发送时间:" + DateUtil.nowDateFormat());
-        rabbitTemplate.convertAndSend(Delay2Config.DELAY_MSG_QUEUE, "延时消息2," + "发送时间:" + DateUtil.nowDateFormat(), message -> {
-            message.getMessageProperties().setExpiration("5000");
-            return message;
-        });
+        sender.sendDelayMessage2(Delay2Config.DELAY_MSG_QUEUE, "延时消息2," + "发送时间:" + DateUtil.nowDateFormat(), 5000);
     }
 
 

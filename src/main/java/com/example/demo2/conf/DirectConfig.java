@@ -13,8 +13,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DirectConfig {
 
+    public static final String DIRECT_QUEUE = "direct_queue";
+
     @Bean
     public Queue queue() {
-        return new Queue("direct_queue");
+        return new Queue(DIRECT_QUEUE);
     }
 }

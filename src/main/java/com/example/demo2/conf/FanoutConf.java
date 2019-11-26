@@ -16,26 +16,30 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class FanoutConf {
+    public static final String FANOUT_EXCHANGE = "fanout_exchange";
+    public static final String MESSAGE_A = "messageA";
+    public static final String MESSAGE_B = "messageB";
+    public static final String MESSAGE_C = "messageC";
 
     @Bean(name="messageA")
     public Queue AMessage() {
-        return new Queue("fanout.A");
+        return new Queue(MESSAGE_A);
     }
 
 
     @Bean(name="messageB")
     public Queue BMessage() {
-        return new Queue("fanout.B");
+        return new Queue(MESSAGE_B);
     }
 
-    @Bean(name="messageC")
+    @Bean(name= FanoutConf.MESSAGE_C)
     public Queue CMessage() {
-        return new Queue("fanout.C");
+        return new Queue(FanoutConf.MESSAGE_C);
     }
 
     @Bean
     FanoutExchange fanoutExchange() {
-        return new FanoutExchange("fanoutExchange");//配置广播路由器
+        return new FanoutExchange(FanoutConf.FANOUT_EXCHANGE);//配置广播路由器
     }
 
     @Bean

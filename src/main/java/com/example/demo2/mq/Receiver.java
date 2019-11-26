@@ -2,6 +2,8 @@ package com.example.demo2.mq;
 
 
 import com.example.demo2.conf.Delay2Config;
+import com.example.demo2.conf.DirectConfig;
+import com.example.demo2.conf.FanoutConf;
 import com.example.demo2.utils.DateUtil;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -16,12 +18,12 @@ import java.util.List;
 public class Receiver {
 
     // 完全匹配消息
-    @RabbitListener(queues="direct_queue")    //监听器监听指定的Queue
+    @RabbitListener(queues= DirectConfig.DIRECT_QUEUE)    //监听器监听指定的Queue
     public void processC(List list) {
         System.out.println("Receive1:"+list);
     }
     // 完全匹配消息
-    @RabbitListener(queues="direct_queue")    //监听器监听指定的Queue
+    @RabbitListener(queues=DirectConfig.DIRECT_QUEUE)    //监听器监听指定的Queue
     public void processD(List list) {
         System.out.println("Receive2:"+list);
     }
@@ -41,15 +43,15 @@ public class Receiver {
     }
 
     // 广播消息
-    @RabbitListener(queues="fanout.A")
-    public void processA(String str1) {
-        System.out.println("ReceiveA:"+str1);
+    @RabbitListener(queues= FanoutConf.MESSAGE_A)
+    public void processA(String str) {
+        System.out.println("ReceiveA:"+str);
     }
-    @RabbitListener(queues="fanout.B")
+    @RabbitListener(queues= FanoutConf.MESSAGE_B)
     public void processB(String str) {
         System.out.println("ReceiveB:"+str);
     }
-    @RabbitListener(queues="fanout.C")
+    @RabbitListener(queues= FanoutConf.MESSAGE_C)
     public void processC(String str) {
         System.out.println("ReceiveC:"+str);
     }

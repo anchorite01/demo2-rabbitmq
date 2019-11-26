@@ -1,5 +1,9 @@
 package com.example.demo2.controller;
 
+import com.example.demo2.conf.Delay2Config;
+import com.example.demo2.conf.DelayConfig;
+import com.example.demo2.conf.DirectConfig;
+import com.example.demo2.conf.FanoutConf;
 import com.example.demo2.model.User;
 import com.example.demo2.mq.Sender;
 import com.example.demo2.utils.DateUtil;
@@ -33,7 +37,7 @@ public class DemoController {
         List<Object> list = new ArrayList<>();
         list.add("hello");
         list.add(new User(10L, 20, "张三", "123321", new Date()));
-        rabbitTemplate.convertAndSend("direct_queue", list);
+        rabbitTemplate.convertAndSend(DirectConfig.DIRECT_QUEUE, list);
 
         System.out.println("--------------------- 通配符匹配消息 ------------------------");
         // 匹配路由
@@ -44,13 +48,13 @@ public class DemoController {
 
         System.out.println("--------------------- 广播消息 ------------------------");
         // 广播路由
-        rabbitTemplate.convertAndSend("fanoutExchange", null, "hello, rabbitmq"
+        rabbitTemplate.convertAndSend(FanoutConf.FANOUT_EXCHANGE, null, "hello, rabbitmq"
                 + DateUtil.nowDateFormat());
 
 
         System.out.println("--------------------- 延时消息 ------------------------");
-        sender.sendDelayMessage("delay_queue_1", "这是延时消息！");
-        sender.sendDelayMessage2("这是延时消息2！");
+        sender.sendDelayMessage(DelayConfig.DELAY_QUEUE1, "这是延时消息！", 3000);
+        sender.sendDelayMessage2(Delay2Config.DELAY_MSG_QUEUE, "这是延时消息2！", 5000);
         return "hello";
     }
 

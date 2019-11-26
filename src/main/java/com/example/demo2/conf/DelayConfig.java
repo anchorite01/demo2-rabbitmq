@@ -18,6 +18,8 @@ import java.util.Map;
 
 @Configuration
 public class DelayConfig {
+    public static final String DELAY_QUEUE1 = "delay_queue_1";
+
     @Bean
     public CustomExchange delayExchange() { // 延时交换机
         Map<String, Object> args = new HashMap<>();
@@ -28,13 +30,13 @@ public class DelayConfig {
 
     @Bean
     public Queue delayQueue1() { // 延时队列
-        Queue queue = new Queue("delay_queue_1", true);
+        Queue queue = new Queue(DELAY_QUEUE1, true);
         return queue;
     }
 
     @Bean
     public Binding delayBinding1() { // 绑定
-        return BindingBuilder.bind(delayQueue1()).to(delayExchange()).with("delay_queue_1").noargs();
+        return BindingBuilder.bind(delayQueue1()).to(delayExchange()).with(DELAY_QUEUE1).noargs();
     }
 
 

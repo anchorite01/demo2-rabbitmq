@@ -35,7 +35,7 @@ public class Delay2Config {
         return QueueBuilder.durable(DELAY_MSG_QUEUE)
                 // 消息变成死信后转发到的交换机
                 .withArgument("x-dead-letter-exchange", DLX_MSG_EXCHANGE)
-                // 私信后重新按照指定的routing_key发送
+                // 死信后重新按照指定的routing_key发送
                 .withArgument("x-dead-letter-routing-key", REAL_MSG_QUEUE)
                 .build();
     }

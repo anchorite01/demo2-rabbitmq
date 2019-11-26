@@ -45,15 +45,20 @@ public class Demo2ApplicationTests {
 
     @Test
     public void delayQueue1Test() {
-        sender.sendDelayMessage("delay_queue_1", "这是一条延时消息");
+        // sender.sendDelayMessage("delay_queue_1", "这是一条延时消息");
+        rabbitTemplate.convertAndSend("delayExchange", "delay_queue_1",  "延时消息1,发送时间:" + DateUtil.nowDateFormat() + "\n" , message -> {
+            // 设置延时时间
+            message.getMessageProperties().setHeader("x-delay", 10000);
+            return message;
+        });
     }
 
 
     @Test
     public void queryTest2() {
         System.out.println("发送时间:" + DateUtil.nowDateFormat());
-        rabbitTemplate.convertAndSend(Delay2Config.DELAY_MSG_QUEUE, "延时消息," + "发送时间:" + DateUtil.nowDateFormat(), message -> {
-            message.getMessageProperties().setExpiration("10000");
+        rabbitTemplate.convertAndSend(Delay2Config.DELAY_MSG_QUEUE, "延时消息2," + "发送时间:" + DateUtil.nowDateFormat(), message -> {
+            message.getMessageProperties().setExpiration("5000");
             return message;
         });
     }

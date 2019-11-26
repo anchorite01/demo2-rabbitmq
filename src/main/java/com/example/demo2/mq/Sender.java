@@ -43,7 +43,7 @@ public class Sender {
      * @Date: 2019/11/14 14:57
      */
     public void sendDelayMessage(String queueName, String msg) {
-        msg = "发送时间:" + DateUtil.nowDateFormat() + "\n" + " msg:" + msg;
+        msg = "延时消息1,发送时间:" + DateUtil.nowDateFormat() + "\n" + " msg:" + msg;
         System.out.println(msg);
         rabbitTemplate.convertAndSend("delayExchange", queueName, msg, message -> {
             // 设置延时时间

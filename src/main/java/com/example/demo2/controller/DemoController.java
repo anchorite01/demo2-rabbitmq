@@ -2,12 +2,12 @@ package com.example.demo2.controller;
 
 import com.example.demo2.model.User;
 import com.example.demo2.mq.Sender;
+import com.example.demo2.utils.DateUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,14 +38,14 @@ public class DemoController {
         System.out.println("--------------------- 通配符匹配消息 ------------------------");
         // 匹配路由
         rabbitTemplate.convertAndSend("exchange", "topic.**", "controller："
-                + new SimpleDateFormat("yyyy-MM-dd HH:mm:SSS").format(new Date()));
+                + DateUtil.nowDateFormat());
         rabbitTemplate.convertAndSend("exchange", "topic.message", "controller："
-                + new SimpleDateFormat("yyyy-MM-dd HH:mm:SSS").format(new Date()));
+                + DateUtil.nowDateFormat());
 
         System.out.println("--------------------- 广播消息 ------------------------");
         // 广播路由
         rabbitTemplate.convertAndSend("fanoutExchange", null, "hello, rabbitmq"
-                + new SimpleDateFormat("yyyy-MM-dd HH:mm:SSS").format(new Date()));
+                + DateUtil.nowDateFormat());
 
 
         System.out.println("--------------------- 延时消息 ------------------------");

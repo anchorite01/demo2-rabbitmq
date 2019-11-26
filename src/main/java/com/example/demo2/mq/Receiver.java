@@ -2,11 +2,10 @@ package com.example.demo2.mq;
 
 
 import com.example.demo2.conf.Delay2Config;
+import com.example.demo2.utils.DateUtil;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 /**
  * @Description: 接收消息
@@ -36,6 +35,10 @@ public class Receiver {
     public void process2(String str) {
         System.out.println("messages:"+str);
     }
+    @RabbitListener(queues="topic.xx")    //监听器监听指定的Queue
+    public void process3(String str) {
+        System.out.println("xx:"+str);
+    }
 
     // 广播消息
     @RabbitListener(queues="fanout.A")
@@ -54,10 +57,10 @@ public class Receiver {
     // 延时消息
     @RabbitListener(queues="delay_queue_1")
     public void delayQueue1(String msg) {
-        System.out.println(msg + " 接收时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        System.out.println(msg + " 接收时间：" + DateUtil.nowDateFormat());
     }
     @RabbitListener(queues= Delay2Config.REAL_MSG_QUEUE)
-    public void query2(String str) {
-        System.out.println(":" + str + "接收时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+    public void query2(String msg) {
+        System.out.println(msg + "\n接收时间：" + DateUtil.nowDateFormat());
     }
 }

@@ -1,7 +1,8 @@
 package com.example.demo2.model;
 
+import com.example.demo2.utils.DateUtil;
+
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -76,7 +77,7 @@ public class User implements Serializable {
                 ", age=" + age +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", birthday=" + new SimpleDateFormat("yyyy-MM-dd HH:mm:SSS").format(birthday) +
+                ", birthday=" + DateUtil.dateFormat(birthday) +
                 '}';
     }
 }

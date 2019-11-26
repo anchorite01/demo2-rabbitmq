@@ -16,6 +16,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TopicConf {
 
+    @Bean(name="xx")
+    public Queue queueXx() {
+        return new Queue("topic.xx");
+    }
+
     @Bean(name="message")
     public Queue queueMessage() {
         return new Queue("topic.message");
@@ -34,6 +39,11 @@ public class TopicConf {
     @Bean
     Binding bindingExchangeMessage(@Qualifier("message") Queue queueMessage, TopicExchange exchange) {
         return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
+    }
+
+    @Bean
+    Binding bindingExchangeXx(@Qualifier("xx") Queue queueMessages, TopicExchange exchange) {
+        return BindingBuilder.bind(queueMessages).to(exchange).with("topic.#");//*表示一个词,#表示零个或多个词
     }
 
     @Bean

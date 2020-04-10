@@ -36,6 +36,11 @@ public class TopicConf {
         return new Queue("topic.messages2");
     }
 
+    @Bean(name="otherMessage1")
+    public Queue otherMessage1() {
+        return new Queue("other.message1");
+    }
+
     @Bean
     public TopicExchange topicExchange() {
         return new TopicExchange("topicExchange");
@@ -58,5 +63,9 @@ public class TopicConf {
     @Bean
     Binding bindingExchangeMessages2(@Qualifier("messages2") Queue queueMessages2) {
         return BindingBuilder.bind(queueMessages2).to(topicExchange()).with("topic.#");//*表示一个词,#表示零个或多个词
+    }
+    @Bean
+    Binding bindingOtherExchangeMessages() {
+        return BindingBuilder.bind(otherMessage1()).to(topicExchange()).with("other.message.#");//*表示一个词,#表示零个或多个词
     }
 }

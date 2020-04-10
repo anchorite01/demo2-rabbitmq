@@ -45,6 +45,10 @@ public class Receiver {
     public void process3(String str) {
         System.out.println("messages2:"+str);
     }
+    @RabbitListener(queues="other.message")    //监听器监听指定的Queue
+    public void process4(String str) {
+        System.out.println("otherMessage:"+str);
+    }
 
     // 广播消息
     @RabbitListener(queues= FanoutConf.MESSAGE_A)

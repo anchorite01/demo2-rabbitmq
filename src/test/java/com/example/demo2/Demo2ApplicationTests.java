@@ -42,7 +42,10 @@ public class Demo2ApplicationTests {
 //        rabbitTemplate.convertAndSend("topicExchange", "topic.#", "controller："
 //                + DateUtil.nowDateFormat());
         // 模糊匹配
-        rabbitTemplate.convertAndSend("topicExchange", "topic.message.hello.aofjdsof", "controller："
+//        rabbitTemplate.convertAndSend("topicExchange", "topic.message.hello.aofjdsof", "controller："
+//                + DateUtil.nowDateFormat());
+        // 其他消息,与交换机不匹配收不到
+        rabbitTemplate.convertAndSend("topicExchange", "other.message", "controller："
                 + DateUtil.nowDateFormat());
 
         /*rabbitTemplate.convertAndSend(FanoutConf.FANOUT_EXCHANGE, null, "hello, rabbitmq"

@@ -33,13 +33,17 @@ public class Receiver {
     public void process1(String str) {
         System.out.println("message:"+str);
     }
-    @RabbitListener(queues="topic.messages")    //监听器监听指定的Queue
-    public void process2(String str) {
-        System.out.println("messages:"+str);
+    @RabbitListener(queues="topic.messageX")    //监听器监听指定的Queue
+    public void processX(String str) {
+        System.out.println("messageX:"+str);
     }
-    @RabbitListener(queues="topic.xx")    //监听器监听指定的Queue
+    @RabbitListener(queues="topic.messages1")    //监听器监听指定的Queue
+    public void process2(String str) {
+        System.out.println("messages1:"+str);
+    }
+    @RabbitListener(queues="topic.messages2")    //监听器监听指定的Queue
     public void process3(String str) {
-        System.out.println("xx:"+str);
+        System.out.println("messages2:"+str);
     }
 
     // 广播消息

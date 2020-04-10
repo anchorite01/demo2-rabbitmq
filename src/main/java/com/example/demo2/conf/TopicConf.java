@@ -16,38 +16,47 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TopicConf {
 
-    @Bean(name="xx")
-    public Queue queueXx() {
-        return new Queue("topic.xx");
-    }
-
     @Bean(name="message")
     public Queue queueMessage() {
         return new Queue("topic.message");
     }
 
-    @Bean(name="messages")
-    public Queue queueMessages() {
-        return new Queue("topic.messages");
+    @Bean(name="messageX")
+    public Queue queueMessageX() {
+        return new Queue("topic.messageX");
+    }
+
+    @Bean(name="messages1")
+    public Queue queueMessages1() {
+        return new Queue("topic.messages1");
+    }
+
+    @Bean(name="messages2")
+    public Queue queueMessages2() {
+        return new Queue("topic.messages2");
     }
 
     @Bean
-    public TopicExchange exchange() {
-        return new TopicExchange("exchange");
+    public TopicExchange topicExchange() {
+        return new TopicExchange("topicExchange");
     }
 
     @Bean
-    Binding bindingExchangeMessage(@Qualifier("message") Queue queueMessage, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
+    Binding bindingExchangeMessage(@Qualifier("message") Queue queueMessage) {
+        return BindingBuilder.bind(queueMessage).to(topicExchange()).with("topic.message");
     }
 
     @Bean
-    Binding bindingExchangeXx(@Qualifier("xx") Queue queueMessages, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessages).to(exchange).with("topic.#");//*表示一个词,#表示零个或多个词
+    Binding bindingExchangeMessageX(@Qualifier("messageX") Queue queueMessageX) {
+        return BindingBuilder.bind(queueMessageX).to(topicExchange()).with("topic.*");
     }
 
     @Bean
-    Binding bindingExchangeMessages(@Qualifier("messages") Queue queueMessages, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessages).to(exchange).with("topic.#");//*表示一个词,#表示零个或多个词
+    Binding bindingExchangeMessages1(@Qualifier("messages1") Queue queueMessages1) {
+        return BindingBuilder.bind(queueMessages1).to(topicExchange()).with("topic.#");//*表示一个词,#表示零个或多个词
+    }
+    @Bean
+    Binding bindingExchangeMessages2(@Qualifier("messages2") Queue queueMessages2) {
+        return BindingBuilder.bind(queueMessages2).to(topicExchange()).with("topic.#");//*表示一个词,#表示零个或多个词
     }
 }

@@ -29,14 +29,20 @@ public class Demo2ApplicationTests {
 
     @Test
     public void contextLoads() throws InterruptedException {
-        // 模糊匹配发送
-        rabbitTemplate.convertAndSend("exchange", "topic.message", "controller："
-                + DateUtil.nowDateFormat());
-        rabbitTemplate.convertAndSend("exchange", "topic.xx", "controller："
-                + DateUtil.nowDateFormat());
-        rabbitTemplate.convertAndSend("exchange", "topic.#", "controller："
-                + DateUtil.nowDateFormat());
-        rabbitTemplate.convertAndSend("exchange", "topic.message.hello", "controller："
+        // 模糊匹配发送, 发送所有
+//        rabbitTemplate.convertAndSend("topicExchange", "topic.message", "controller："
+//                + DateUtil.nowDateFormat());
+        // 一个都没匹配
+//        rabbitTemplate.convertAndSend("topicExchange", "xxxxxx", "controller："
+////                + DateUtil.nowDateFormat());
+        // 模糊匹配
+//        rabbitTemplate.convertAndSend("topicExchange", "topic.xx", "controller："
+//                + DateUtil.nowDateFormat());
+        // 模糊匹配
+//        rabbitTemplate.convertAndSend("topicExchange", "topic.#", "controller："
+//                + DateUtil.nowDateFormat());
+        // 模糊匹配
+        rabbitTemplate.convertAndSend("topicExchange", "topic.message.hello.aofjdsof", "controller："
                 + DateUtil.nowDateFormat());
 
         /*rabbitTemplate.convertAndSend(FanoutConf.FANOUT_EXCHANGE, null, "hello, rabbitmq"

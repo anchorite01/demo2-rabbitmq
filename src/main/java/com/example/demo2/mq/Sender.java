@@ -1,6 +1,5 @@
 package com.example.demo2.mq;
 
-import com.example.demo2.conf.Delay2Config;
 import com.example.demo2.conf.DirectConfig;
 import com.example.demo2.model.User;
 import com.example.demo2.utils.DateUtil;
@@ -35,7 +34,7 @@ public class Sender {
         list.add(new User(10L, 20, "张三", "123321", new Date()));
 //        System.out.println("Sender : " + list);
         System.out.println("Sender:" + task);
-        this.rabbitTemplate.convertAndSend(DirectConfig.DIRECT_QUEUE, list);
+        this.rabbitTemplate.convertAndSend(DirectConfig.DIRECT_QUEUE, list);    // 发送一对一
     }
 
     /**

@@ -16,3 +16,4 @@ HELP.md
 demo2-rabbitmq.iml
 src/main/resources/static/
 src/main/resources/templates/
+/target/

@@ -37,6 +37,7 @@ public class Receiver {
     public void processX(String str) {
         System.out.println("messageX:"+str);
     }
+
     @RabbitListener(queues="topic.messages1")    //监听器监听指定的Queue
     public void process2(String str) {
         System.out.println("messages1:"+str);
@@ -45,7 +46,8 @@ public class Receiver {
     public void process3(String str) {
         System.out.println("messages2:"+str);
     }
-    @RabbitListener(queues="other.message")    //监听器监听指定的Queue
+
+    @RabbitListener(queues="other.message1")    //监听器监听指定的Queue
     public void process4(String str) {
         System.out.println("otherMessage:"+str);
     }

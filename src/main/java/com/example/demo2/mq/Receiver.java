@@ -32,47 +32,58 @@ public class Receiver {
     @RabbitListener(queues="topic.message")    //监听器监听指定的Queue
     public void process1(String str) {
         System.out.println("message:"+str);
+
+        System.out.println("---------------------------------------------");
     }
     @RabbitListener(queues="topic.messageX")    //监听器监听指定的Queue
     public void processX(String str) {
         System.out.println("messageX:"+str);
+        System.out.println("---------------------------------------------");
     }
 
     @RabbitListener(queues="topic.messages1")    //监听器监听指定的Queue
     public void process2(String str) {
         System.out.println("messages1:"+str);
+        System.out.println("---------------------------------------------");
     }
     @RabbitListener(queues="topic.messages2")    //监听器监听指定的Queue
     public void process3(String str) {
         System.out.println("messages2:"+str);
+        System.out.println("---------------------------------------------");
     }
 
     @RabbitListener(queues="other.message1")    //监听器监听指定的Queue
     public void process4(String str) {
         System.out.println("otherMessage:"+str);
+        System.out.println("---------------------------------------------");
     }
 
     // 广播消息
     @RabbitListener(queues= FanoutConf.MESSAGE_A)
     public void processA(String str) {
         System.out.println("ReceiveA:"+str);
+        System.out.println("---------------------------------------------");
     }
     @RabbitListener(queues= FanoutConf.MESSAGE_B)
     public void processB(String str) {
         System.out.println("ReceiveB:"+str);
+        System.out.println("---------------------------------------------");
     }
     @RabbitListener(queues= FanoutConf.MESSAGE_C)
     public void processC(String str) {
         System.out.println("ReceiveC:"+str);
+        System.out.println("---------------------------------------------");
     }
 
     // 延时消息
     @RabbitListener(queues="delay_queue_1")
     public void delayQueue1(String msg) {
         System.out.println(msg + " 接收时间：" + DateUtil.nowDateFormat());
+        System.out.println("---------------------------------------------");
     }
     @RabbitListener(queues= Delay2Config.REAL_MSG_QUEUE)
     public void query2(String msg) {
         System.out.println(msg + "\n接收时间：" + DateUtil.nowDateFormat());
+        System.out.println("---------------------------------------------");
     }
 }

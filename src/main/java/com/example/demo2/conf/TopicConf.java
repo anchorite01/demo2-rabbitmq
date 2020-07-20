@@ -61,6 +61,10 @@ public class TopicConf {
         return BindingBuilder.bind(queueMessages1).to(topicExchange()).with("topic.#");//*表示一个词,#表示零个或多个词
     }
     @Bean
+    Binding bindingExchangeMessages11(@Qualifier("messages1") Queue queueMessages1) {
+        return BindingBuilder.bind(queueMessages1).to(topicExchange()).with("topicMessages1");//*表示一个词,#表示零个或多个词
+    }
+    @Bean
     Binding bindingExchangeMessages2(@Qualifier("messages2") Queue queueMessages2) {
         return BindingBuilder.bind(queueMessages2).to(topicExchange()).with("topic.#");//*表示一个词,#表示零个或多个词
     }

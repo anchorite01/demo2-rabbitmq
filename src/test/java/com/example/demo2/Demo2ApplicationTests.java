@@ -39,8 +39,11 @@ public class Demo2ApplicationTests {
 //        rabbitTemplate.convertAndSend("topicExchange", "topic.xx", "controller："
 //                + DateUtil.nowDateFormat());
         // 模糊匹配
-        rabbitTemplate.convertAndSend("topicExchange", "topic.#", "controller："
+//        rabbitTemplate.convertAndSend("topicExchange", "topic.#", "controller："
+//                + DateUtil.nowDateFormat());
+        rabbitTemplate.convertAndSend("topicExchange", "topicMessages1", "controller："
                 + DateUtil.nowDateFormat());
+
         // 模糊匹配
 //        rabbitTemplate.convertAndSend("topicExchange", "topic.message.hello.aofjdsof", "controller："
 //                + DateUtil.nowDateFormat());

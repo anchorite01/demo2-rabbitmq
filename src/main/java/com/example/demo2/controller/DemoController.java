@@ -5,6 +5,7 @@ import com.example.demo2.conf.DelayConfig;
 import com.example.demo2.conf.DirectConfig;
 import com.example.demo2.conf.FanoutConf;
 import com.example.demo2.model.User;
+import com.example.demo2.mq.MqAnnotation;
 import com.example.demo2.mq.Sender;
 import com.example.demo2.utils.DateUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -23,12 +24,19 @@ import java.util.List;
  */
 @RestController
 public class DemoController {
-
     @Autowired
     private RabbitTemplate rabbitTemplate;
-
     @Autowired
     private Sender sender;
+    @Autowired
+    private MqAnnotation mqAnnotation;
+
+    @GetMapping("/send")
+    public String send(String exchange, String routingKey, String message) {
+        mqAnnotation.send(exchange, routingKey, message);
+        return "SUCCESS";
+    }
+
 
     @GetMapping("hello")
     public String sayHello() {

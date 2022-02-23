@@ -97,6 +97,16 @@ public class MqAnnotation {
         log.info("4.name:{}-----msg:{}", QUEUE_NAME + "123445", msg);
     }
 
+
+    /**
+     * 发送消息
+     */
+    public void send(String exchange, String routingKey, String message) {
+        log.info("send EXCHANGE:{}, TOPIC_KEY:{}, msg:{}", exchange, routingKey, message);
+        rabbitTemplate.convertAndSend(exchange, routingKey, message);
+    }
+
+
     /**
      * 队列不存在时，需要创建一个队列，并且与exchange绑定
      * value: @Queue 注解，用于声明队列，value 为 queueName, durable 表示队列是否持久化（RabbitMQ重启后，交换机还存在）, autoDelete 表示没有消费者之后队列是否自动删除
@@ -111,7 +121,7 @@ public class MqAnnotation {
             // 路由key
             key = "r"))
     public void consumerNoQueue(String data) {
-        System.out.println("consumerNoQueue: " + data);
+        log.info("consumerNoQueue: {}", data);
         SleepUtils.sleep(3);
     }
 
@@ -122,7 +132,7 @@ public class MqAnnotation {
             exchange = @Exchange(value = "topic.e", type = ExchangeTypes.TOPIC), key = "r"), ackMode = "MANUAL")
     public void consumerNoAck(String data) {
         // 要求手动ack，这里不ack，会怎样?
-        System.out.println("consumerNoAck: " + data);
+        log.info("consumerNoAck: {}", data);
         SleepUtils.sleep(3);
     }
 
@@ -139,7 +149,7 @@ public class MqAnnotation {
             ackMode = "MANUAL")
     public void consumerDoAck(String data, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel)
             throws IOException {
-        System.out.println("consumerDoAck: " + data + ", i=" + i);
+        log.info("consumerDoAck: {}, i={}", data, i);
         SleepUtils.sleep(1);
 
         if (data.contains("success") || ++i > 3) {
@@ -161,8 +171,16 @@ public class MqAnnotation {
             concurrency = "4")
     public void multiConsumer(String data) {
         SleepUtils.sleep(2);
-        System.out.println("multiConsumer: " + data);
+        log.info("multiConsumer: {}", data);
     }
 
+    /**
+     * 广播模式
+     */
+    @RabbitListener(bindings = @QueueBinding(value = @Queue(value = "query_n6", durable = "false", autoDelete = "false"),
+            exchange = @Exchange(value = "topic_e", type = ExchangeTypes.FANOUT)))
+    public void fanoutConsumer(String data) {
+        log.warn("fanoutConsumer: {}", data);
+    }
 
 }
